@@ -61,7 +61,11 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           NativeApi.getBatteryLevel().then((value) {
             print(value);
+            _counter = value;
+            setState(() {});
           });
+
+          NativeApi.testArguments().then(print);
         },
         tooltip: 'native test',
         child: const Icon(Icons.battery_charging_full_rounded),

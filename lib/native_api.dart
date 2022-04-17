@@ -16,10 +16,10 @@ class NativeApi {
     return result;
   }
 
-  static Future<String> getResponse() async {
+  static Future<String> testArguments() async {
     String message = "";
     try {
-      final result = await platform.invokeMethod('getResponse', [1, 2]);
+      final result = await platform.invokeMethod('testArguments', {"first": 1, "second": 2});
       message = result.toString();
     } on PlatformException catch (e) {
       message = "Failed to get response: '${e.message}'.";

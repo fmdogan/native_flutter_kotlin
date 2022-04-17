@@ -37,8 +37,9 @@ class BatteryService {
                         result.error("UNAVAILABLE", "Battery level not available.", null)
                     }
                 }
-                if (call.method == "getResponse") {
-                    var args = call.arguments;
+                if (call.method == "testArguments") {
+                    var args = call.arguments as Map<*, *>;
+                    var arg1 = call.argument<Int>("first")
                     result.success(args)
                 } else {
                     result.notImplemented()
