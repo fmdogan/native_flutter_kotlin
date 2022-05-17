@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
-class NativeApi {
-  NativeApi._();
+class BatteryService {
+  BatteryService._();
 
   static const platform = MethodChannel('samples.flutter.dev/battery');
 

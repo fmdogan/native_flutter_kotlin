@@ -12,8 +12,8 @@ import io.flutter.plugin.common.MethodChannel
 
 class BatteryService {
     companion object {
-        const val channel = "samples.flutter.dev/battery"
-        fun getBatteryLevel(applicationContext: Context): Int {
+        private const val channel = "samples.flutter.dev/battery"
+        private fun getBatteryLevel(applicationContext: Context): Int {
             val batteryLevel: Int
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val batteryManager = applicationContext.getSystemService(Context.BATTERY_SERVICE) as BatteryManager

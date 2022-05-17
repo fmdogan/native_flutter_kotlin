@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:native_test/native_api.dart';
+import 'package:native_test/native_services/battery_service.dart';
+import 'package:native_test/native_services/downloads_service.dart';
 
 void main() => runApp(const MyApp());
 
@@ -27,18 +28,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -48,24 +41,31 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             TextButton(
-              onPressed: () => NativeApi.getBatteryLevel().then((value) {
+              onPressed: () => BatteryService.getBatteryLevel().then((value) {
                 _counter = value;
                 setState(() {});
               }),
               child: const Text("get battery level"),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () => DownloadService.downloadsDirectory.then((value) {
+                debugPrint(value?.path);
+              }),
+              child: const Text("get download directory"),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          NativeApi.getBatteryLevel().then((value) {
+          BatteryService.getBatteryLevel().then((value) {
             print(value);
             _counter = value;
             setState(() {});
           });
 
-          NativeApi.testArguments().then(print);
+          BatteryService.testArguments().then(print);
         },
         tooltip: 'native test',
         child: const Icon(Icons.battery_charging_full_rounded),
